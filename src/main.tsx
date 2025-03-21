@@ -6,11 +6,16 @@ import { ConfigProvider } from "antd-mobile";
 import zhCN from 'antd-mobile/es/locales/en-US'
 
 import 'lib-flexible'
-import '@/assets/reset.css'
+import './index.scss'
 
+// REDUX
+import { Provider } from 'react-redux'
+import store from '@/store'
 
 createRoot(document.getElementById('root')!).render(
   <ConfigProvider locale={zhCN}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </ConfigProvider>,
 )
