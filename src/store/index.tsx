@@ -1,14 +1,13 @@
-import { createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 // import reduxLogger from 'redux-logger';
 // import reduxThunk from 'redux-thunk';
-// import reduxPromise from 'redux-promise';
-import reducer from './reducer'
+import taskSliceReducer from './features/taskSlice'
 
-// let middleware = [reduxLogger, reduxThunk, reduxPromise]
-
-const store = createStore(
-    reducer,
-    // applyMiddleware(...middleware)
-)
+const store = configureStore({
+    reducer: {
+        task: taskSliceReducer
+    },
+     // middleware: [reduxThunk, reduxLogger]
+})
 
 export default store;
