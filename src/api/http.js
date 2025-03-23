@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // 创建 axios 实例
-const instance = axios.create({
+const http = axios.create({
   baseURL: '/api', // 根据环境变量设置基础 URL
   timeout: 10000, // 请求超时时间
   headers: {
@@ -10,7 +10,7 @@ const instance = axios.create({
 });
 
 // 请求拦截器
-instance.interceptors.request.use(
+http.interceptors.request.use(
   (config) => {
     // 在发送请求之前做些什么，例如添加 token
     const token = localStorage.getItem('token');
@@ -26,7 +26,7 @@ instance.interceptors.request.use(
 );
 
 // 响应拦截器
-instance.interceptors.response.use(
+http.interceptors.response.use(
   (response) => {
     // 对响应数据做些什么
     if (response.status === 200) {
@@ -61,22 +61,22 @@ instance.interceptors.response.use(
 
 // 封装 GET 请求
 export const get = (url, params = {}) => {
-  return instance.get(url, { params });
+  return http.get(url, { params });
 };
 
 // 封装 POST 请求
 export const post = (url, data = {}) => {
-  return instance.post(url, data);
+  return http.post(url, data);
 };
 
 // 封装 PUT 请求
 export const put = (url, data = {}) => {
-  return instance.put(url, data);
+  return http.put(url, data);
 };
 
 // 封装 DELETE 请求
 export const del = (url, params = {}) => {
-  return instance.delete(url, { params });
+  return http.delete(url, { params });
 };
 
-export default instance;
+export default http;

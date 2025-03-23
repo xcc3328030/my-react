@@ -1,14 +1,21 @@
-import React from "react";
-import { connect } from 'react-redux'
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllTaskAsync } from "@/store/features/taskSlice";
 
-class VoteMain extends React.Component {
-    render() {
-        const { supNum, oppNum } = this.props;
-        return <div>
-            <p>支持人数：{supNum}</p>
-            <p>反对人数：{oppNum}</p>
-        </div>
-    }
-}
+const VoteMain = function VoteMain(props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllTaskAsync());
+  }, []);
 
-export default connect(state => state.base)(VoteMain)
+  const supNum = useSelector((state) => state.task.supNum);
+  const oppNum = useSelector((state) => state.task.oppNum);
+  return (
+    <div>
+      <p>支持人数：{supNum}</p>
+      <p>反对人数：{oppNum}</p>
+    </div>
+  );
+};
+
+export default VoteMain;

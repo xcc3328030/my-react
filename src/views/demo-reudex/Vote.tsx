@@ -1,9 +1,12 @@
-import { connect } from 'react-redux'
 import VoteFooter from './VoteFooter'
 import VoteMain from './VoteMain'
+import { useSelector } from "react-redux";
 
 const Vote = function Vote(props) {
-    const { supNum, oppNum } = props
+
+    const supNum = useSelector((state) => state.task.supNum);
+    const oppNum = useSelector((state) => state.task.oppNum);
+
     return <>
      <h1>{ supNum + oppNum }</h1>
      <VoteMain />
@@ -11,4 +14,4 @@ const Vote = function Vote(props) {
     </>
 }
 
-export default connect(state => state.base)(Vote)
+export default Vote
